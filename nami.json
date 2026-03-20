@@ -7,23 +7,20 @@
     "verb": "to be many",
     "adverb": "often",
     "preposition": "",
-    "origin": "и",
-    "language": "Russian",
     "malroot": "",
-    "extra": "Sometimes spelled <y> Could also be from Polish or Spanish. Using i in adj/noun/... form is the same as ij, both dealing with plurals."
+	"etymology":"и (Russian)"
   },
   {
     "word": "ix",
-    "adjective": "my/mine",
-    "noun": "I/me",
+    "adjective": "my",
+    "noun": "i/me",
     "verb": "",
     "adverb": "",
     "preposition": "",
-    "origin": "ich",
-    "language": "German",
     "malroot": "",
-    "extra": ""
+	"etymology":"ich (German)"
   },
+
   {
     "word": "ac",
     "adjective": "You/Yours",
@@ -31,10 +28,8 @@
     "verb": "",
     "adverb": "",
     "preposition": "",
-    "origin": "a priori",
-    "language": "a priori",
     "malroot": "",
-    "extra": "used to be “aq” but after the 202512-20 reform, q was “depricated”"
+	"etymology":"aq (LRI)"
   },
   {
     "word": "et",
@@ -43,10 +38,9 @@
     "verb": "",
     "adverb": "",
     "preposition": "",
-    "origin": "a priori",
-    "language": "a priori",
     "malroot": "",
-    "extra": ""
+    "etymology": "это (Russian)",
+	"extra": "nico tje, LRI malkepu 3p pronouns."
   },
   {
     "word": "xo",
@@ -55,10 +49,8 @@
     "verb": "to command, to control",
     "adverb": "",
     "preposition": "",
-    "origin": "o",
-    "language": "toki Pona",
     "malroot": "",
-    "extra": ""
+    "etymology": "o (toki Pona)"
   },
   {
     "word": "ol",
