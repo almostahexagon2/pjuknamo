@@ -1,64 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>pjuknami LRI takkara</title>
+  <meta charset="UTF-8">
+  <title>JSON Table from File</title>
   <style>
-    table {
-      border-collapse: collapse;
-      width: 60%;
-      margin: 20px auto;
-    }
-    th, td {
-      border: 1px solid #333;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
+    th { background-color: #f2f2f2; text-align: left; }
+    .nested { margin-left: 10px; border-left: 2px dotted #aaa; padding-left: 10px; }
+    .json-key { font-weight: bold; }
   </style>
 </head>
 <body>
+  <h2>JSON Data Table</h2>
+  <div id="jsonContainer"></div>
 
-<h2 style="text-align:center;">Pjuknamo</h2>
+  <script>
+    // Recursive function to render nested objects/arrays
+    function renderNested(value) {
+      if (typeof value === 'object' && value !== null) {
+        const div = document.createElement('div');
+        div.classList.add('nested');
+        if (Array.isArray(value)) {
+          value.forEach((item, i) => {
+            const p = document.createElement('div');
+            p.innerHTML = `[${i}]: ${renderNested(item)}`;
+            div.appendChild(p);
+          });
+        } else {
+          for (let key in value) {
+            const p = document.createElement('div');
+            p.innerHTML = `<span class="json-key">${key}:</span> ${renderNested(value[key])}`;
+            div.appendChild(p);
+          }
+        }
+        return div.outerHTML;
+      } else {
+        return value; // primitive
+      }
+    }
 
-<table id="dataTable">
-  <thead>
-    <tr id="tableHead"></tr>
-  </thead>
-  <tbody id="tableBody"></tbody>
-</table>
+    // Render JSON array as table
+    function renderJSONTable(jsonArray, container) {
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
 
-<script>
-fetch('nami.json')
-  .then(response => response.json())
-  .then(data => {
-    const tableHead = document.getElementById('tableHead');
-    const tableBody = document.getElementById('tableBody');
+      const allKeys = new Set();
+      jsonArray.forEach(obj => Object.keys(obj).forEach(k => allKeys.add(k)));
+      const keys = Array.from(allKeys);
 
-    // Create table headers
-    const headers = Object.keys(data[0]);
-    headers.forEach(key => {
-      const th = document.createElement('th');
-      th.textContent = key;
-      tableHead.appendChild(th);
-    });
+      // Header
+      const trHead = document.createElement('tr');
+      keys.forEach(key => {
+        const th = document.createElement('th');
+        th.textContent = key;
+        trHead.appendChild(th);
+      });
+      thead.appendChild(trHead);
 
-    // Create table rows
-    data.forEach(item => {
-      const row = document.createElement('tr');
-
-      headers.forEach(key => {
-        const td = document.createElement('td');
-        td.textContent = item[key];
-        row.appendChild(td);
+      // Rows
+      jsonArray.forEach(obj => {
+        const tr = document.createElement('tr');
+        keys.forEach(key => {
+          const td = document.createElement('td');
+          if (obj[key] !== undefined) td.innerHTML = renderNested(obj[key]);
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
       });
 
-      tableBody.appendChild(row);
-    });
-  })
-  .catch(error => console.error('Error loading JSON:', error));
-</script>
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      container.appendChild(table);
+    }
 
+    // Fetch external JSON file
+    fetch('data.json')  // Make sure your JSON file is in the same folder
+      .then(response => response.json())
+      .then(jsonData => {
+        const container = document.getElementById('jsonContainer');
+        renderJSONTable(jsonData, container);
+      })
+      .catch(error => console.error('Error loading JSON:', error));
+  </script>
 </body>
 </html>
