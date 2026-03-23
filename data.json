@@ -1,0 +1,12 @@
+[
+  { 
+    "word": "x*č",
+      "max": { "noun": "a want", "verb": "to want", "adj": "wanting" },
+      "pos": { "noun": "a want", "verb": "to want", "adj": "wanting" },
+      "neu": { "noun": "a want", "verb": "to want", "adj": "wanting" },
+      "neg": { "noun": "a want", "verb": "to want", "adj": "wanting" },
+      "min": { "noun": "a want", "verb": "to want", "adj": "wanting" },
+      "ctr": { "noun": "a want", "verb": "to want", "adj": "wanting" },
+      "atr": { "noun": "a want", "verb": "to want", "adj": "wanting" }
+  }
+]
